@@ -17,7 +17,7 @@ import {
 } from './types'
 
 export const rootNotionPageId: string = parsePageId(
-  getSiteConfig('rootNotionPageId'),
+  process.env.ROOT_PAGE_ID || getSiteConfig('rootNotionPageId'),
   { uuid: false }
 )
 
@@ -27,7 +27,7 @@ if (!rootNotionPageId) {
 
 // if you want to restrict pages to a single notion workspace (optional)
 export const rootNotionSpaceId: string | null = parsePageId(
-  getSiteConfig('rootNotionSpaceId', null),
+  process.env.ROOT_SPACE_ID || getSiteConfig('rootNotionSpaceId', null),
   { uuid: true }
 )
 
@@ -47,19 +47,19 @@ export const environment = process.env.NODE_ENV || 'development'
 export const isDev = environment === 'development'
 
 // general site config
-export const name: string = getSiteConfig('name')
-export const author: string = getSiteConfig('author')
-export const domain: string = getSiteConfig('domain')
-export const description: string = getSiteConfig('description', 'Notion Blog')
+export const name: string = process.env.NAME || getSiteConfig('name')
+export const author: string = process.env.AUTHOR || getSiteConfig('author')
+export const domain: string = process.env.DOMAIN || getSiteConfig('domain')
+export const description: string = process.env.GRAPH_DESCRIPTION || getSiteConfig('description', 'Notion Blog')
 export const language: string = getSiteConfig('language', 'en')
 
 // social accounts
-export const twitter: string | null = getSiteConfig('twitter', null)
-export const mastodon: string | null = getSiteConfig('mastodon', null)
-export const github: string | null = getSiteConfig('github', null)
-export const youtube: string | null = getSiteConfig('youtube', null)
-export const linkedin: string | null = getSiteConfig('linkedin', null)
-export const newsletter: string | null = getSiteConfig('newsletter', null)
+export const twitter: string | null = process.env.TWITTER_USERNAME || getSiteConfig('twitter', null)
+export const mastodon: string | null = process.env.MASTODON_PROFILE_LINK || getSiteConfig('mastodon', null)
+export const github: string | null = process.env.GITHUB_USERNAME || getSiteConfig('github', null)
+export const youtube: string | null = process.env.YOUTUBE_CHANNEL || getSiteConfig('youtube', null)
+export const linkedin: string | null = process.env.LINKEDIN_USERNAME || getSiteConfig('linkedin', null)
+export const newsletter: string | null = process.env.NEWSLETTER_LINK || getSiteConfig('newsletter', null)
 export const zhihu: string | null = getSiteConfig('zhihu', null)
 
 export const getMastodonHandle = (): string | null => {
